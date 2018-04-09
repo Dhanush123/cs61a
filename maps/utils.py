@@ -81,7 +81,8 @@ def mean(s):
     -0.5
     """
     # BEGIN Question 1
-    mean_num = 0
+    assert len(s) > 0
+    mean_num = 0.0
     for x in s:
         mean_num += x
     return mean_num/len(s)

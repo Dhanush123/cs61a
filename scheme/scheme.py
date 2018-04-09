@@ -31,9 +31,7 @@ def scheme_eval(expr, env, _=None): # Optional third argument is ignored
         return SPECIAL_FORMS[first](rest, env)
     else:
         # BEGIN PROBLEM 5
-        proc = scheme_eval(first, env)
-        check_procedure(proc)
-        return proc.eval_call(rest, env)
+        "*** YOUR CODE HERE ***"
         # END PROBLEM 5
 
 def self_evaluating(expr):
@@ -50,11 +48,7 @@ def eval_all(expressions, env):
     """Evaluate each expression im the Scheme list EXPRESSIONS in
     environment ENV and return the value of the last."""
     # BEGIN PROBLEM 8
-    last_val = None
-    while expressions is not nil:
-        last_val = scheme_eval(expressions.first, env)
-        expressions = expressions.second
-    return last_val
+    return scheme_eval(expressions.first, env)
     # END PROBLEM 8
 
 ################
@@ -78,16 +72,13 @@ class Frame:
     def define(self, symbol, value):
         """Define Scheme SYMBOL to have VALUE."""
         # BEGIN PROBLEM 3
-        self.bindings[symbol] = value
+        "*** YOUR CODE HERE ***"
         # END PROBLEM 3
 
     def lookup(self, symbol):
         """Return the value bound to SYMBOL. Errors if SYMBOL is not found."""
         # BEGIN PROBLEM 3
-        if symbol in self.bindings:
-            return self.bindings[symbol]
-        elif self.parent is not None:
-            return self.parent.lookup(symbol)
+        "*** YOUR CODE HERE ***"
         # END PROBLEM 3
         raise SchemeError('unknown identifier: {0}'.format(symbol))
 
@@ -119,8 +110,7 @@ class Procedure:
         unevaluated actual-parameter expressions and ENV as the environment
         in which the operands are to be evaluated."""
         # BEGIN PROBLEM 5
-        pair = operands.map(lambda expr: scheme_eval(expr, env))
-        return scheme_apply(self, pair, env)
+        "*** YOUR CODE HERE ***"
         # END PROBLEM 5
 
 def scheme_procedurep(x):
@@ -154,12 +144,7 @@ class PrimitiveProcedure(Procedure):
             python_args.append(args.first)
             args = args.second
         # BEGIN PROBLEM 4
-        if(self.use_env):
-            python_args.append(env)
-        try:
-            return self.fn(*python_args)
-        except TypeError:
-            raise SchemeError("error in applying function to args")
+        "*** YOUR CODE HERE ***"
         # END PROBLEM 4
 
 class UserDefinedProcedure(Procedure):
@@ -231,17 +216,11 @@ def do_define_form(expressions, env):
     if scheme_symbolp(target):
         check_form(expressions, 2, 2)
         # BEGIN PROBLEM 6
-        env.define(target, scheme_eval(expressions.second.first, env))
-        return target
+        "*** YOUR CODE HERE ***"
         # END PROBLEM 6
     elif isinstance(target, Pair) and scheme_symbolp(target.first):
         # BEGIN PROBLEM 10
-        env.define(expressions.first.first, LambdaProcedure(expressions.first.second, expressions.second, env))
-        return expressions.first.first
-        #return LambdaProcedure(expressions.first, expressions.second, env)
-        # print("--->",expressions)
-        # print("--->",expressions.first.second)
-        # print("--->",expressions.second.first)
+        "*** YOUR CODE HERE ***"
         # END PROBLEM 10
     else:
         bad_target = target.first if isinstance(target, Pair) else target
@@ -251,8 +230,7 @@ def do_quote_form(expressions, env):
     """Evaluate a quote form."""
     check_form(expressions, 1, 1)
     # BEGIN PROBLEM 7
-    #print("exp",expressions)
-    return expressions.first
+    "*** YOUR CODE HERE ***"
     # END PROBLEM 7
 
 def do_begin_form(expressions, env):
@@ -266,7 +244,7 @@ def do_lambda_form(expressions, env):
     formals = expressions.first
     check_formals(formals)
     # BEGIN PROBLEM 9
-    return LambdaProcedure(expressions.first, expressions.second, env)
+    "*** YOUR CODE HERE ***"
     # END PROBLEM 9
 
 def do_if_form(expressions, env):

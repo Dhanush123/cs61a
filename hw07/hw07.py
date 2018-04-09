@@ -20,6 +20,23 @@ class Link:
         else:
             return 'Link({}, {})'.format(self.first, repr(self.rest))
 
+    def __str__(self):
+        """Returns a human-readable string representation of the Link
+
+        >>> s = Link(1, Link(2, Link(3, Link(4))))
+        >>> str(s)
+        '<1 2 3 4>'
+        >>> str(Link(1))
+        '<1>'
+        >>> str(Link.empty)  # empty tuple
+        '()'
+        """
+        string = '<'
+        while self.rest is not Link.empty:
+            string += str(self.first) + ' '
+            self = self.rest
+        return string + str(self.first) + '>'
+
 def digits(n):
     """Return the digits of n as a linked list.
 
@@ -31,7 +48,7 @@ def digits(n):
     s = Link.empty
     while n > 0:
         n, last = n // 10, n % 10
-        s = Link(last,s)
+        "*** YOUR CODE HERE ***"
     return s
 
 class Fib():
@@ -58,14 +75,7 @@ class Fib():
         self.value = value
 
     def next(self):
-        if(self.value == 0):
-            new_fib = Fib(1)
-            Fib.prev = self.value
-            return new_fib
-        else:
-            new_fib = Fib(Fib.prev + self.value)
-            Fib.prev = self.value
-            return new_fib
+        self.next = 
 
     def __repr__(self):
         return str(self.value)
@@ -107,34 +117,7 @@ class VendingMachine:
     >>> w.vend()
     'Here is your soda.'
     """
-    def __init__(self,name,cost):
-        self.name = name
-        self.cost = cost
-        self.stock = 0
-        self.balance = 0
-
-    def vend(self):
-        if(self.stock == 0):
-            return "Machine is out of stock."
-        if(self.balance < self.cost):
-            return "You must deposit $" + str(self.cost-self.balance) + " more."
-        ret = "Here is your " + self.name
-        if(self.balance - self.cost > 0):
-            change = " and $" + str(self.balance - self.cost) + " change"
-            ret += change
-        self.stock -= 1
-        self.balance = 0
-        return ret + "."
-
-    def deposit(self,money):
-        if(self.stock == 0):
-            return "Machine is out of stock. Here is your $" + str(money) + "."
-        self.balance += money
-        return "Current balance: $" + str(self.balance)
-
-    def restock(self,quantity):
-        self.stock += quantity
-        return "Current " + self.name + " stock: " + str(self.stock)
+    "*** YOUR CODE HERE ***"
 
 class MissManners:
     """A container class that only forwards messages that say please.
@@ -171,11 +154,7 @@ class MissManners:
         self.obj = obj
 
     def ask(self, message, *args):
-        magic_word = "please "
+        magic_word = 'please '
         if not message.startswith(magic_word):
-            return "You must learn to say please first."
-        cmd = message[len(magic_word):] #rest of string besides please
-        if hasattr(self.obj, cmd): #check if object has cmd
-            return getattr(self.obj, cmd)(*args) #take cmd/action now
-        else:
-            return "Thanks for asking, but I know not how to " + cmd + "."
+            return 'You must learn to say please first.'
+        "*** YOUR CODE HERE ***"
